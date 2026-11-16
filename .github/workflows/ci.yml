@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add the WASM target, clippy and rustfmt
+        run: |
+          rustup target add wasm32-wasip2
+          rustup component add clippy rustfmt
+
+      - name: Formatting
+        run: cargo fmt --check
+
+      - name: Unit and manifest tests
+        run: cargo test --locked
+
+      - name: Clippy
+        run: cargo clippy --all-targets --locked -- -D warnings
+
+      - name: Compile as Zed does
+        run: cargo check --target wasm32-wasip2 --locked

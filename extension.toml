@@ -1,0 +1,16 @@
+id = "css-modules-definition-lsp"
+name = "CSS Modules Definition"
+version = "0.0.1"
+schema_version = 1
+authors = ["LaExploradora laexploramail@gmail.com"]
+description = "Go to definition for CSS Modules class names in TSX/JSX"
+repository = "https://github.com/LaExploradora/css-modules-definition-lsp"
+
+[language_servers.cssmodules]
+name = "CSS Modules Language Server"
+languages = ["TSX", "TypeScript", "JavaScript"]
+
+[language_servers.cssmodules.language_ids]
+"TSX" = "typescriptreact"
+"TypeScript" = "typescript"
+"JavaScript" = "javascript"
